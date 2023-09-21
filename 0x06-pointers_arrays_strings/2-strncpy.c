@@ -1,7 +1,8 @@
-#include "main.h'
+#include "main.h"
 
 /**
 * _strncpy - the main function of the code
+*
 * @src: parameter
 * @dest: parameter
 * @n:  paramter
