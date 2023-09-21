@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * *_strcat - main function prototype
+ * _strcat - main function prototype
  *
  * @src: concactinate parameter
  *
- * @desk: contactinate parameter
+ * @dest: contactinate parameter
  *
  * Return: dest
  */
