@@ -1,52 +1,42 @@
 #include <math.h>
+#include <stdio.h>
 #include "search_algos.h"
 
+
 /**
- * jump_list - search a single linked list using the jump search method
- * @list: pointer to first node in linked list
- * @size: size of the list (number of nodes)
- * @value: value to be searched for
- *
- * Return: pointer to first node containing value or NULL if not present
- * or list is empty
+ * jump_search - search a sorted array using jump search
+ * @array: pointer to first element in array
+ * @size: number of elements in array
+ * @value: value to search for
+ * Return: index of value in array or -1 if not found
  */
-listint_t *jump_list(listint_t *list, size_t size, int value)
+int jump_search(int *array, size_t size, int value)
 {
-	listint_t *hold = list;
-	int i, jump;
+	size_t gap, index;
 
-	if (list == NULL || size == 0)
-		return (NULL);
-
-	jump = sqrt(size);
-
-	while (hold->next != NULL)
+	if (size == 0 || (size == 1 && array[0] != value))
+		return (-1);
+	gap = sqrt(size);
+	for (index = 0; index < size; index += gap)
 	{
-		list = hold;
-
-		for (i = 0; i < jump; i++)
-		{
-			hold = hold->next;
-			if (hold->next == NULL)
-				break;
-		}
-
-		printf("Value checked at index [%lu] = [%d]\n", hold->index, hold->n);
-
-		if (hold->n >= value)
+		if (array[index] >= value)
 			break;
+		printf("Value checked array[%lu] = [%d]\n", index, array[index]);
 	}
-
-	printf("Value found between indexes [%lu] and [%lu]\n", list->index,
-	       hold->index);
-
-	while (list != NULL && list != hold->next)
+	if (index == 0)
+		return (-1);
+	index -= gap;
+	gap = index + gap;
+	printf("Value found between indexes [%lu] and [%lu]\n", index, gap);
+	while (index < size && index <= gap)
 	{
-		printf("Value checked at index [%lu] = [%d]\n", list->index, list->n);
-		if (list->n == value)
-			return (list);
-		list = list->next;
+		if (array[index] == value)
+		{
+			printf("Value checked array[%lu] = [%d]\n", index, array[index]);
+			return (index);
+		}
+		printf("Value checked array[%lu] = [%d]\n", index, array[index]);
+		index++;
 	}
-
-	return (NULL);
+	return (-1);
 }
